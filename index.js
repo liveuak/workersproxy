@@ -1,13 +1,19 @@
+// Custom domain of your WorkersProxy.
 const main_domain = 'https://cdn.reverse-proxy.live/'
 
+// Subdomain of your Cloudflare Worker.
 const workers_domain = 'https://google.xasiimov.workers.dev'
 
+// Website you intended to retrieve for users.
 const upstream = 'https://www.google.com/'
 
+// Website you intended to retrieve for users using mobile devices.
 const upstream_mobile = 'https://www.google.com/'
 
+// Countries and regions where you wish to suspend your service.
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
+// IP addresses which you wish to block from using your service.
 const blocked_ip_address = ['0.0.0.0', '10.0.0.0']
 
 addEventListener('fetch', event => {
