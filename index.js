@@ -1,8 +1,5 @@
-// Custom domain of your WorkersProxy.
-const main_domain = 'https://cdn.reverse-proxy.live/'
-
-// Subdomain of your Cloudflare Worker.
-const workers_domain = 'https://google.xasiimov.workers.dev'
+// List of domains bind to your WorkersProxy.
+const domain_list = ['https://cdn.reverse-proxy.live/', 'https://google.xasiimov.workers.dev/']
 
 // Website you intended to retrieve for users.
 const upstream = 'https://www.google.com/'
@@ -28,13 +25,15 @@ async function fetchAndApply(request) {
     let response = null;
     let url = request.url;
 
-    if (device_status(user_agent)){
-        url = url.replace(main_domain, upstream);
-        url = url.replace(workers_domain, upstream);
+    if (await device_status(user_agent)){
+        upstream_domain = upstream
     } else {
-        url = url.replace(main_domain, upstream_mobile);
-        url = url.replace(workers_domain, upstream_mobile);
+        upstream_domain = upstream_mobile
     }
+
+    for(let domain of domain_list) {
+        url = url.replace(domain, upstream_domain)
+    };
 
     if (blocked_region.includes(region)) {
         response = new Response('Access denied: WorkersProxy is not available in your region yet.', {
@@ -55,7 +54,7 @@ async function fetchAndApply(request) {
     return response;
 }
 
-function device_status (userAgentInfo) {
+async function device_status (userAgentInfo) {
     var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
     var flag = true;
     for (var v = 0; v < Agents.length; v++) {

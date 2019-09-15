@@ -41,11 +41,8 @@ Obviously, there's a few constants defined at the top of the main Javascript fil
 In order to customize your own WorkersProxy, you should edit them according to your expectation.
 
 ```
-// Custom domain of your WorkersProxy.
-const main_domain = 'https://cdn.reverse-proxy.live/'
-
-// Subdomain of your Cloudflare Worker.
-const workers_domain = 'https://google.xasiimov.workers.dev'
+// List of domains bind to your WorkersProxy.
+const domain_list = ['https://cdn.reverse-proxy.live/', 'https://google.xasiimov.workers.dev']
 
 // Website you intended to retrieve for users.
 const upstream = 'https://www.google.com/'
