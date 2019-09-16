@@ -38,11 +38,11 @@ By configuring Geolocation and IP address filters, you might directly suspend yo
 
 Obviously, there's a few constants defined at the top of the main Javascript file.
 
-In order to customize your own WorkersProxy, you should edit them according to your expectation.
+To customize your own WorkersProxy Service, you should edit them according to your expectations.
 
 ```
 // List of domains bind to your WorkersProxy.
-const domain_list = ['https://cdn.reverse-proxy.live/', 'https://google.xasiimov.workers.dev']
+const domain_list = ['https://cdn.reverse-proxy.live/', 'https://google.xasiimov.workers.dev/']
 
 // Website you intended to retrieve for users.
 const upstream = 'https://www.google.com/'
