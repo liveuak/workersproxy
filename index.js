@@ -11,7 +11,7 @@ const upstream_mobile = 'https://www.google.com/'
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
 // IP addresses which you wish to block from using your service.
-const blocked_ip_address = ['0.0.0.0', '10.0.0.0']
+const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 
 addEventListener('fetch', event => {
     event.respondWith(fetchAndApply(event.request));
@@ -45,11 +45,33 @@ async function fetchAndApply(request) {
         });
     } else{
         let method = request.method;
-        let headers = request.headers;
-        response = fetch(url, {
+        let request_headers = request.headers;
+        let new_request_headers = new Headers(request_headers)
+
+        new_request_headers.set('origin', upstream_domain)
+        new_request_headers.set('referer', upstream_domain)
+
+        origin_response = await fetch(url, {
             method: method,
-            headers: headers
+            headers: new_request_headers
         })
+        
+        let response_body = origin_response.body
+        let response_headers = origin_response.headers
+        let new_response_headers = new Headers(response_headers)
+        let status = origin_response.status
+        
+        new_response_headers.set('access-control-allow-origin', '*')
+        new_response_headers.set('access-control-allow-credentials', true)
+        new_response_headers.delete('content-security-policy')
+        new_response_headers.delete('content-security-policy-report-only')
+        new_response_headers.delete('clear-site-data')
+
+        response = new Response(response_body, {
+            status,
+            headers: response_headers
+        })
+        response = origin_response
     }
     return response;
 }
