@@ -18,21 +18,21 @@ By configuring Geolocation and IP address filters, you might directly suspend yo
 
 ### Deploy on Cloudflare Workers
 
-1. Navigate to [Cloudflare Workers](https://workers.cloudflare.com), register or sign in your Cloudflare account, set custom subdomain for workers, and create a new worker.
+1. Navigate to [Cloudflare Workers](https://workers.cloudflare.com), register or sign in your Cloudflare account, and set custom subdomain for workers, and create a new Worker.
 
 2. Customize 'index.js', paste the code into Cloudflare online editor to replace the default one.
 
-3. Change name of your worker, save and deploy it, and check whether its performance fulfills your demand.
+3. Change name of your Worker, save and deploy it, and check whether its performance fulfills your demand.
 
-### Bind to custom domain
+### Bind to Custom Domain
 
 1. Check whether your domain is currently under Cloudflare's protection.
 
 2. Navigate to the dashboard of your domain, select 'Workers' page, and click on 'Add Route'.
 
-3. Suppose your domain is `yourdomain.com`. Type `https://example.yourdomain.com/*` in `Route` text field and choose the worker you previously created. `example` here can be customized to any second-level domain you like.
+3. Type `https://<domain-name>/*` in `Route` and select the Worker you created previously.
 
-4. Add a CNAME DNS record for your domain. To be specific, type the `example` in step 3 for `CNAME`, the **full subdomain address** of your workers for `Content` and set it `Proxied`.
+4. Add a CNAME DNS record for your custom domain. Concretely, enter the subdomain (or '@' for root) in the 'Name' field, enter the **second level domain** of your workers in the 'Target' field, and set 'Proxy status' to 'Proxied'.
 
 ### Customize index.js
 
@@ -54,5 +54,5 @@ const upstream_mobile = 'https://www.google.com/'
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
 // IP addresses which you wish to block from using your service.
-const blocked_ip_address = ['0.0.0.0', '10.0.0.0']
+const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 ```
