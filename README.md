@@ -30,9 +30,9 @@ By configuring Geolocation and IP address filters, you might directly suspend yo
 
 2. Navigate to the dashboard of your domain, select 'Workers' page, and click on 'Add Route'.
 
-3. Input your domain and choose the worker you previously created.
+3. Suppose your domain is `yourdomain.com`. Type `https://example.yourdomain.com/*` in `Route` text field and choose the worker you previously created. `example` here can be customized to any second-level domain you like.
 
-4. Add a CNAME record of your domain which directs to the **subdomain** of your workers.
+4. Add a CNAME DNS record for your domain. To be specific, type the `example` in step 3 for `CNAME`, the **full subdomain address** of your workers for `Content` and set it `Proxied`.
 
 ### Customize index.js
 
