@@ -13,6 +13,10 @@ const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 // IP addresses which you wish to block from using your service.
 const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 
+//Fix http/https issue
+const http = "http://"
+const https = "https://"
+
 addEventListener('fetch', event => {
     event.respondWith(fetchAndApply(event.request));
 })
@@ -24,6 +28,13 @@ async function fetchAndApply(request) {
     const user_agent = request.headers.get('user-agent');
     let response = null;
     let url = request.url;
+
+	//Fix http/https issue
+	if (url.startsWith(http)) {
+		url = url.replace(http, https);
+		response = Response.redirect(url);
+		return response;
+	}
 
     if (await device_status(user_agent)){
         upstream_domain = upstream
