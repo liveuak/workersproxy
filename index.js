@@ -57,9 +57,12 @@ async function fetchAndApply(request) {
         let method = request.method;
         let request_headers = request.headers;
         let new_request_headers = new Headers(request_headers)
+        let host_name = upstream_domain.replace(http, '')
+        host_name = upstream_domain.replace(https, '')
+        host_name = upstream_domain.replace('/', '')
 
-        new_request_headers.set('origin', upstream_domain)
-        new_request_headers.set('referer', upstream_domain)
+        new_request_headers.set('Host', host_name)
+        new_request_headers.set('Referer', upstream_domain)
 
         origin_response = await fetch(url, {
             method: method,
@@ -71,17 +74,16 @@ async function fetchAndApply(request) {
         let new_response_headers = new Headers(response_headers)
         let status = origin_response.status
         
-        new_response_headers.set('access-control-allow-origin', '*')
-        new_response_headers.set('access-control-allow-credentials', true)
-        new_response_headers.delete('content-security-policy')
-        new_response_headers.delete('content-security-policy-report-only')
-        new_response_headers.delete('clear-site-data')
+        new_response_headers.set('access-control-allow-origin', '*');
+        new_response_headers.set('access-control-allow-credentials', true);
+        new_response_headers.delete('content-security-policy');
+        new_response_headers.delete('content-security-policy-report-only');
+        new_response_headers.delete('clear-site-data');
 
         response = new Response(response_body, {
             status,
             headers: response_headers
         })
-        response = origin_response
     }
     return response;
 }
