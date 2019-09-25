@@ -1,11 +1,8 @@
-// List of domains bind to your WorkersProxy.
-const domain_list = ['https://cdn.reverse-proxy.live/', 'https://google.xasiimov.workers.dev/']
-
 // Website you intended to retrieve for users.
-const upstream = 'https://www.google.com/'
+const upstream = 'en.wikipedia.org'
 
 // Website you intended to retrieve for users using mobile devices.
-const upstream_mobile = 'https://www.google.com/'
+const upstream_mobile = 'en.wikipedia.org'
 
 // Countries and regions where you wish to suspend your service.
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
@@ -23,27 +20,28 @@ async function fetchAndApply(request) {
     const region = request.headers.get('cf-ipcountry').toUpperCase();
     const ip_address = request.headers.get('cf-connecting-ip');
     const user_agent = request.headers.get('user-agent');
-	const http = "http://";
-	const https = "https://";
-	
+
     let response = null;
-    let url = request.url;
+    let url = new URL(request.url);
+    let url_host = url.host;
 
-	if (url.startsWith(http)) {
-		url = url.replace(http, https);
-		response = Response.redirect(url);
-		return response;
-	}
+    response = new Response(url.href, {
+        status: 200
+    });
 
+    if (url.protocol == 'http:') {
+        url.protocol = 'https:'
+        response = Response.redirect(url.href);
+        return response;
+    }
+    
     if (await device_status(user_agent)) {
         upstream_domain = upstream
     } else {
         upstream_domain = upstream_mobile
     }
 
-    for(let domain of domain_list) {
-        url = url.replace(domain, upstream_domain)
-    };
+    url.host = upstream_domain;
 
     if (blocked_region.includes(region)) {
         response = new Response('Access denied: WorkersProxy is not available in your region yet.', {
@@ -56,31 +54,29 @@ async function fetchAndApply(request) {
     } else{
         let method = request.method;
         let request_headers = request.headers;
-        let new_request_headers = new Headers(request_headers)
-        let host_name = upstream_domain.replace(http, '')
-        host_name = upstream_domain.replace(https, '')
-        host_name = upstream_domain.replace('/', '')
+        let new_request_headers = new Headers(request_headers);
 
-        new_request_headers.set('Host', host_name)
-        new_request_headers.set('Referer', upstream_domain)
+        new_request_headers.set('Host', upstream_domain);
+        new_request_headers.set('Referer', url.href);
 
-        origin_response = await fetch(url, {
+        let original_response = await fetch(url.href, {
             method: method,
             headers: new_request_headers
         })
-        
-        let response_body = origin_response.body
-        let response_headers = origin_response.headers
-        let new_response_headers = new Headers(response_headers)
-        let status = origin_response.status
-        
+
+        let original_response_clone = original_response.clone();
+        let original_text = await replace_response_text(original_response_clone, upstream_domain, url_host);
+        let response_headers = original_response.headers;
+        let new_response_headers = new Headers(response_headers);
+        let status = original_response.status;
+
         new_response_headers.set('access-control-allow-origin', '*');
         new_response_headers.set('access-control-allow-credentials', true);
         new_response_headers.delete('content-security-policy');
         new_response_headers.delete('content-security-policy-report-only');
         new_response_headers.delete('clear-site-data');
 
-        response = new Response(response_body, {
+        response = new Response(original_text, {
             status,
             headers: response_headers
         })
@@ -88,11 +84,24 @@ async function fetchAndApply(request) {
     return response;
 }
 
-async function device_status (userAgentInfo) {
-    var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+async function replace_response_text(response, upstream_domain, host_name) {
+    const { headers } = response;
+    const content_type = headers.get('content-type');
+    if (content_type.includes('application/text') || content_type.includes('text/html')) {
+        let text = await response.text()
+        let re = new RegExp(upstream_domain, 'g')
+        text = text.replace(re, host_name);
+        return text;
+    } else {
+        return await response.body;
+    }
+  }
+
+async function device_status (user_agent_info) {
+    var agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
     var flag = true;
-    for (var v = 0; v < Agents.length; v++) {
-        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+    for (var v = 0; v < agents.length; v++) {
+        if (user_agent_info.indexOf(agents[v]) > 0) {
             flag = false;
             break;
         }
