@@ -1,14 +1,20 @@
 // Website you intended to retrieve for users.
-const upstream = 'en.wikipedia.org'
+const upstream = 'www.google.com'
 
 // Website you intended to retrieve for users using mobile devices.
-const upstream_mobile = 'en.wikipedia.org'
+const upstream_mobile = 'www.google.com'
 
 // Countries and regions where you wish to suspend your service.
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
 // IP addresses which you wish to block from using your service.
 const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
+
+// Replace texts.
+const replace_dict = {
+    '$upstream': '$custom_domain',
+    '//google.com': ''
+}
 
 
 addEventListener('fetch', event => {
@@ -24,10 +30,6 @@ async function fetchAndApply(request) {
     let response = null;
     let url = new URL(request.url);
     let url_host = url.host;
-
-    response = new Response(url.href, {
-        status: 200
-    });
 
     if (url.protocol == 'http:') {
         url.protocol = 'https:'
@@ -78,7 +80,7 @@ async function fetchAndApply(request) {
 
         response = new Response(original_text, {
             status,
-            headers: response_headers
+            headers: new_response_headers
         })
     }
     return response;
@@ -89,8 +91,25 @@ async function replace_response_text(response, upstream_domain, host_name) {
     const content_type = headers.get('content-type');
     if (content_type.includes('application/text') || content_type.includes('text/html')) {
         let text = await response.text()
-        let re = new RegExp(upstream_domain, 'g')
-        text = text.replace(re, host_name);
+
+        var i, j;
+        for (i in replace_dict) {
+            j = replace_dict[i]
+            if (i == '$upstream') {
+                i = upstream_domain
+            } else if (i == '$custom_domain') {
+                i = host_name
+            }
+            
+            if (j == '$upstream') {
+                j = upstream_domain
+            } else if (j == '$custom_domain') {
+                j = host_name
+            }
+
+            let re = new RegExp(i, 'g')
+            text = text.replace(re, j);
+        }
         return text;
     } else {
         return await response.body;

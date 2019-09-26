@@ -41,18 +41,21 @@ Obviously, there's a few constants defined at the top of the main Javascript fil
 To customize your own WorkersProxy Service, you should edit them according to your expectations.
 
 ```
-// List of domains bind to your WorkersProxy.
-const domain_list = ['https://cdn.reverse-proxy.live/', 'https://google.xasiimov.workers.dev/']
-
 // Website you intended to retrieve for users.
-const upstream = 'https://www.google.com/'
+const upstream = 'www.google.com'
 
 // Website you intended to retrieve for users using mobile devices.
-const upstream_mobile = 'https://www.google.com/'
+const upstream_mobile = 'www.google.com'
 
 // Countries and regions where you wish to suspend your service.
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
 // IP addresses which you wish to block from using your service.
 const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
+
+// Replace texts.
+const replace_dict = {
+    '$upstream': '$custom_domain',
+    '//google.com': ''
+}
 ```
