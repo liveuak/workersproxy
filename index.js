@@ -1,3 +1,4 @@
+
 // Website you intended to retrieve for users.
 const upstream = 'www.google.com'
 
@@ -67,7 +68,7 @@ async function fetchAndApply(request) {
         })
 
         let original_response_clone = original_response.clone();
-        let original_text = await replace_response_text(original_response_clone, upstream_domain, url_host);
+        let original_text = null;
         let response_headers = original_response.headers;
         let new_response_headers = new Headers(response_headers);
         let status = original_response.status;
@@ -78,6 +79,13 @@ async function fetchAndApply(request) {
         new_response_headers.delete('content-security-policy-report-only');
         new_response_headers.delete('clear-site-data');
 
+        const content_type = new_response_headers.get('content-type');
+        if (content_type.includes('text/html') && content_type.includes('UTF-8')) {
+            original_text = await replace_response_text(original_response_clone, upstream_domain, url_host);
+        } else {
+            original_text = original_response_clone.body
+        }
+
         response = new Response(original_text, {
             status,
             headers: new_response_headers
@@ -87,34 +95,29 @@ async function fetchAndApply(request) {
 }
 
 async function replace_response_text(response, upstream_domain, host_name) {
-    const { headers } = response;
-    const content_type = headers.get('content-type');
-    if (content_type.includes('application/text') || content_type.includes('text/html')) {
-        let text = await response.text()
+    let text = await response.text()
 
-        var i, j;
-        for (i in replace_dict) {
-            j = replace_dict[i]
-            if (i == '$upstream') {
-                i = upstream_domain
-            } else if (i == '$custom_domain') {
-                i = host_name
-            }
-            
-            if (j == '$upstream') {
-                j = upstream_domain
-            } else if (j == '$custom_domain') {
-                j = host_name
-            }
-
-            let re = new RegExp(i, 'g')
-            text = text.replace(re, j);
+    var i, j;
+    for (i in replace_dict) {
+        j = replace_dict[i]
+        if (i == '$upstream') {
+            i = upstream_domain
+        } else if (i == '$custom_domain') {
+            i = host_name
         }
-        return text;
-    } else {
-        return await response.body;
+        
+        if (j == '$upstream') {
+            j = upstream_domain
+        } else if (j == '$custom_domain') {
+            j = host_name
+        }
+
+        let re = new RegExp(i, 'g')
+        text = text.replace(re, j);
     }
-  }
+    return text;
+}
+
 
 async function device_status (user_agent_info) {
     var agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
