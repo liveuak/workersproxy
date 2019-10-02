@@ -1,6 +1,8 @@
 # WorkersProxy
 
-[![LICENSE](https://img.shields.io/github/license/Siujoeng-Lau/WorkersProxy.svg)](https://github.com/Siujoeng-Lau/WorkersProxy/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/github/license/Siujoeng-Lau/WorkersProxy.svg?style=for-the-badge)](https://github.com/Siujoeng-Lau/WorkersProxy/blob/master/LICENSE)
+[![Pull requests](https://img.shields.io/github/issues-pr-closed/Siujoeng-Lau/WorkersProxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/WorkersProxy/pulls)
+[![GitHub stars](https://img.shields.io/github/stars/Siujoeng-Lau/WorkersProxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/WorkersProxy/stargazers)
 
 ## Introduction
 WorkersProxy is a lightweight Javascript application that retrieves resource as a client from other servers.
