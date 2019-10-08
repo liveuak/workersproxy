@@ -4,7 +4,9 @@
   "description": "Lightweight reverse proxy implemented with Cloudflare Workers.",
   "main": "index.js",
   "scripts": {
-    "test": "wrangler build"
+    "test": "wrangler preview --watch",
+    "build": "wrangler build",
+    "deploy": "wrangler publish"
   },
   "repository": {
     "type": "git",

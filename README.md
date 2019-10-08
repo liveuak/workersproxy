@@ -18,7 +18,30 @@ By configuring Geolocation and IP address filters, you might directly suspend yo
 
 ## Getting Started
 
-### Deploy on Cloudflare Workers
+### Deploy with Wrangler
+
+1. [Installing Wrangler.](https://github.com/cloudflare/wrangler#installation)
+
+2. Generate a new project.
+
+```
+wrangler generate my-workers-proxy https://github.com/Siujoeng-Lau/Workers-Proxy
+```
+
+3. [Configure](https://developers.cloudflare.com/workers/quickstart/#configure) your project's `wrangler.toml` file to prepare your project for deployment.
+
+```
+wrangler config
+```
+
+4. Build and deploy on Cloudflare Workers.
+
+```
+wrangler build
+wrangler publish
+```
+
+### Deploy manually
 
 1. Navigate to [Cloudflare Workers](https://workers.cloudflare.com), register or sign in your Cloudflare account, and set custom subdomain for workers, and create a new Worker.
 
