@@ -1,22 +1,19 @@
-// Local cache, CDN
+import CONFIG from './proxy_config.json';
+
 // Website you intended to retrieve for users.
-const upstream = 'www.google.com'
+var upstream = CONFIG.upstream;
 
 // Website you intended to retrieve for users using mobile devices.
-const upstream_mobile = 'www.google.com'
+var upstream_mobile = CONFIG.upstream_mobile;
 
 // Countries and regions where you wish to suspend your service.
-const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
+var blocked_region = CONFIG.blocked_region;
 
 // IP addresses which you wish to block from using your service.
-const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
+var blocked_ip_address = CONFIG.blocked_ip_address;
 
 // Replace texts.
-const replace_dict = {
-    '$upstream': '$custom_domain',
-    '//google.com': ''
-}
-
+var replace_dict = CONFIG.replace_dict;
 
 addEventListener('fetch', event => {
     event.respondWith(fetchAndApply(event.request));
@@ -37,11 +34,11 @@ async function fetchAndApply(request) {
         response = Response.redirect(url.href);
         return response;
     }
-    
+
     if (await device_status(user_agent)) {
-        upstream_domain = upstream
+        var upstream_domain = upstream;
     } else {
-        upstream_domain = upstream_mobile
+        var upstream_domain = upstream_mobile;
     }
 
     url.host = upstream_domain;
