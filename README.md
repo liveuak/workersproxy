@@ -18,7 +18,9 @@ By configuring Geolocation and IP address filters, you might directly suspend yo
 
 ## Getting Started
 
-### Deploy with Wrangler
+### Build and Deploy
+
+#### Deploy with Wrangler
 
 1. [Installing Wrangler.](https://github.com/cloudflare/wrangler#installation)
 
@@ -41,7 +43,7 @@ wrangler build
 wrangler publish
 ```
 
-### Deploy manually
+#### Deploy manually
 
 1. Navigate to [Cloudflare Workers](https://workers.cloudflare.com), register or sign in your Cloudflare account, and set custom subdomain for workers, and create a new Worker.
 
@@ -61,26 +63,28 @@ wrangler publish
 
 ### Customize index.js
 
-Obviously, there's a few constants defined at the top of the main Javascript file.
+Basically, there's a seperate JSON config file named `proxy_config.json`.
 
-To customize your own WorkersProxy Service, you should edit them according to your expectations.
+To customize your own WorkersProxy Service, you should edit values according to your expectations.
 
 ```
-// Website you intended to retrieve for users.
-const upstream = 'www.google.com'
-
-// Website you intended to retrieve for users using mobile devices.
-const upstream_mobile = 'www.google.com'
-
-// Countries and regions where you wish to suspend your service.
-const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
-
-// IP addresses which you wish to block from using your service.
-const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
-
-// Replace texts.
-const replace_dict = {
-    '$upstream': '$custom_domain',
-    '//google.com': ''
-}
+{ 
+    "upstream":"www.google.com",
+    "upstream_mobile":"www.google.com",
+    "blocked_region":[ 
+       "CN",
+       "KP",
+       "SY",
+       "PK",
+       "CU"
+    ],
+    "blocked_ip_address":[ 
+       "0.0.0.0",
+       "127.0.0.1"
+    ],
+    "replace_dict":{ 
+       "$upstream":"$custom_domain",
+       "//google.com":""
+    }
+ }
 ```
