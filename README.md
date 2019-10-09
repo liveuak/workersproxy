@@ -69,22 +69,22 @@ To customize your own WorkersProxy Service, you should edit values according to 
 
 ```
 { 
-    "upstream":"www.google.com",
-    "upstream_mobile":"www.google.com",
-    "blocked_region":[ 
-       "CN",
-       "KP",
-       "SY",
-       "PK",
-       "CU"
-    ],
-    "blocked_ip_address":[ 
-       "0.0.0.0",
-       "127.0.0.1"
-    ],
-    "replace_dict":{ 
-       "$upstream":"$custom_domain",
-       "//google.com":""
-    }
- }
+   "upstream":"www.google.com",
+   "upstream_mobile":"www.google.com",
+   "blocked_region":[ 
+      "CN",
+      "KP",
+      "SY",
+      "PK",
+      "CU"
+   ],
+   "blocked_ip_address":[ 
+      "0.0.0.0",
+      "127.0.0.1"
+   ],
+   "replace_dict":{ 
+      "$upstream":"$custom_domain",
+      "//google.com":""
+   }
+}
 ```
