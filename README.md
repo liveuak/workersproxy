@@ -1,11 +1,11 @@
-# WorkersProxy
+# Workers-Proxy
 
-[![LICENSE](https://img.shields.io/github/license/Siujoeng-Lau/WorkersProxy.svg?style=for-the-badge)](https://github.com/Siujoeng-Lau/WorkersProxy/blob/master/LICENSE)
-[![Pull requests](https://img.shields.io/github/issues-pr-closed/Siujoeng-Lau/WorkersProxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/WorkersProxy/pulls)
-[![GitHub stars](https://img.shields.io/github/stars/Siujoeng-Lau/WorkersProxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/WorkersProxy/stargazers)
+[![LICENSE](https://img.shields.io/github/license/Siujoeng-Lau/Workers-Proxy.svg?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/LICENSE)
+[![Pull requests](https://img.shields.io/github/issues-pr-closed/Siujoeng-Lau/Workers-Proxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/pulls)
+[![GitHub stars](https://img.shields.io/github/stars/Siujoeng-Lau/Workers-Proxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/stargazers)
 
 ## Introduction
-WorkersProxy is a lightweight Javascript application that retrieves resource as a client from other servers.
+Workers-Proxy is a lightweight Javascript application that retrieves resource as a client from other servers.
 
 Deploying on [Cloudflare Workers](https://www.cloudflare.com/products/cloudflare-workers/), which is an influential platform for building serverless applications, you could build customized reverse proxy without purchasing computing engines and configuring web servers such as Nginx.
 
@@ -65,7 +65,7 @@ wrangler publish
 
 Basically, there's a seperate JSON config file named `proxy_config.json`.
 
-To customize your own WorkersProxy Service, you should edit values according to your expectations.
+To customize your own Workers-Proxy Service, you should edit values according to your expectations.
 
 ```
 { 
