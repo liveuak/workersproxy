@@ -9,3 +9,4 @@ node_modules/
 .cargo-ok
 wrangler.toml
 dist/
+.DS_store
