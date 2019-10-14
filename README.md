@@ -63,28 +63,26 @@ wrangler publish
 
 ### Customize index.js
 
-Basically, there's a seperate JSON config file named `proxy_config.json`.
+Basically, there are a few constants on the top of the 'index.js' file.
 
-To customize your own Workers-Proxy Service, you should edit values according to your expectations.
+To customize your own Workers-Proxy Service, you should edit these constants according to your expectations.
 
 ```
-{ 
-   "upstream":"www.google.com",
-   "upstream_mobile":"www.google.com",
-   "blocked_region":[ 
-      "CN",
-      "KP",
-      "SY",
-      "PK",
-      "CU"
-   ],
-   "blocked_ip_address":[ 
-      "0.0.0.0",
-      "127.0.0.1"
-   ],
-   "replace_dict":{ 
-      "$upstream":"$custom_domain",
-      "//google.com":""
-   }
+// Website you intended to retrieve for users.
+const upstream = 'www.google.com'
+
+// Website you intended to retrieve for users using mobile devices.
+const upstream_mobile = 'www.google.com'
+
+// Countries and regions where you wish to suspend your service.
+const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
+
+// IP addresses which you wish to block from using your service.
+const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
+
+// Replace texts.
+const replace_dict = {
+    '$upstream': '$custom_domain',
+    '//google.com': ''
 }
 ```

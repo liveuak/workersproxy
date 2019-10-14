@@ -1,19 +1,20 @@
-import CONFIG from './proxy_config.json';
-
 // Website you intended to retrieve for users.
-var upstream = CONFIG.upstream;
+const upstream = 'www.google.com'
 
 // Website you intended to retrieve for users using mobile devices.
-var upstream_mobile = CONFIG.upstream_mobile;
+const upstream_mobile = 'www.google.com'
 
 // Countries and regions where you wish to suspend your service.
-var blocked_region = CONFIG.blocked_region;
+const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
 // IP addresses which you wish to block from using your service.
-var blocked_ip_address = CONFIG.blocked_ip_address;
+const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 
 // Replace texts.
-var replace_dict = CONFIG.replace_dict;
+const replace_dict = {
+    '$upstream': '$custom_domain',
+    '//google.com': ''
+}
 
 addEventListener('fetch', event => {
     event.respondWith(fetchAndApply(event.request));
