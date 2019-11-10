@@ -71,7 +71,6 @@ async function fetchAndApply(request) {
         let new_response_headers = new Headers(response_headers);
         let status = original_response.status;
 
-        new_response_headers.set('cache-control' ,'public, max-age=14400')
         new_response_headers.set('access-control-allow-origin', '*');
         new_response_headers.set('access-control-allow-credentials', true);
         new_response_headers.delete('content-security-policy');
