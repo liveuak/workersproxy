@@ -10,6 +10,9 @@ const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 // IP addresses which you wish to block from using your service.
 const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 
+// Whether to use HTTPS protocol for upstream address.
+const https = true
+
 // Replace texts.
 const replace_dict = {
     '$upstream': '$custom_domain',
@@ -30,10 +33,10 @@ async function fetchAndApply(request) {
     let url = new URL(request.url);
     let url_host = url.host;
 
-    if (url.protocol == 'http:') {
-        url.protocol = 'https:'
-        response = Response.redirect(url.href);
-        return response;
+    if (https == true) {
+      url.protocol = 'https:';
+    } else {
+      url.protocol = 'http:';
     }
 
     if (await device_status(user_agent)) {
