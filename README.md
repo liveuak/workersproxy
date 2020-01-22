@@ -14,7 +14,7 @@ Moreover, crucial performance, such as latency and availability, will be optimiz
 By configuring Geolocation and IP address filters, you might directly suspend your reverse proxy service in specific countries or regions according to their regulations. Taking advantage of the mobile redirector, you could distribute various webpages based on users' devices.
 
 ## Demo
-[Reverse-Proxy Project](https://cdn.reverse-proxy.live) (This demo may not available in specific regions.)
+[Reverse-Proxy Project](https://cdn.reverse-proxy.live) (This demo may not be available in specific regions.)
 
 ## Getting Started
 
