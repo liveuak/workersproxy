@@ -1,6 +1,9 @@
 // Website you intended to retrieve for users.
 const upstream = 'www.google.com'
 
+// Custom pathname for the upstream website.
+const upstream_path = '/'
+
 // Website you intended to retrieve for users using mobile devices.
 const upstream_mobile = 'www.google.com'
 
@@ -31,7 +34,7 @@ async function fetchAndApply(request) {
 
     let response = null;
     let url = new URL(request.url);
-    let url_host = url.host;
+    let url_hostname = url.hostname;
 
     if (https == true) {
       url.protocol = 'https:';
@@ -46,6 +49,11 @@ async function fetchAndApply(request) {
     }
 
     url.host = upstream_domain;
+    if (url.pathname == '/') {
+        url.pathname = upstream_path;
+    } else {
+        url.pathname = upstream_path + url.pathname;
+    }
 
     if (blocked_region.includes(region)) {
         response = new Response('Access denied: WorkersProxy is not available in your region yet.', {
@@ -82,7 +90,7 @@ async function fetchAndApply(request) {
 
         const content_type = new_response_headers.get('content-type');
         if (content_type.includes('text/html') && content_type.includes('UTF-8')) {
-            original_text = await replace_response_text(original_response_clone, upstream_domain, url_host);
+            original_text = await replace_response_text(original_response_clone, upstream_domain, url_hostname);
         } else {
             original_text = original_response_clone.body
         }
