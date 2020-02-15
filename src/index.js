@@ -37,9 +37,9 @@ async function fetchAndApply(request) {
     let url_hostname = url.hostname;
 
     if (https == true) {
-      url.protocol = 'https:';
+        url.protocol = 'https:';
     } else {
-      url.protocol = 'http:';
+        url.protocol = 'http:';
     }
 
     if (await device_status(user_agent)) {
@@ -59,17 +59,17 @@ async function fetchAndApply(request) {
         response = new Response('Access denied: WorkersProxy is not available in your region yet.', {
             status: 403
         });
-    } else if(blocked_ip_address.includes(ip_address)){
+    } else if (blocked_ip_address.includes(ip_address)) {
         response = new Response('Access denied: Your IP address is blocked by WorkersProxy.', {
             status: 403
         });
-    } else{
+    } else {
         let method = request.method;
         let request_headers = request.headers;
         let new_request_headers = new Headers(request_headers);
 
-        new_request_headers.set('Host', upstream_domain);
-        new_request_headers.set('Referer', url.href);
+        new_request_headers.set('Host', url.hostname);
+        new_request_headers.set('Referer', url.hostname);
 
         let original_response = await fetch(url.href, {
             method: method,
@@ -114,7 +114,7 @@ async function replace_response_text(response, upstream_domain, host_name) {
         } else if (i == '$custom_domain') {
             i = host_name
         }
-        
+
         if (j == '$upstream') {
             j = upstream_domain
         } else if (j == '$custom_domain') {
@@ -128,7 +128,7 @@ async function replace_response_text(response, upstream_domain, host_name) {
 }
 
 
-async function device_status (user_agent_info) {
+async function device_status(user_agent_info) {
     var agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
     var flag = true;
     for (var v = 0; v < agents.length; v++) {
