@@ -16,6 +16,9 @@ const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 // Whether to use HTTPS protocol for upstream address.
 const https = true
 
+// Whether to disable cache.
+const disable_cache = true
+
 // Replace texts.
 const replace_dict = {
     '$upstream': '$custom_domain',
@@ -81,6 +84,10 @@ async function fetchAndApply(request) {
         let response_headers = original_response.headers;
         let new_response_headers = new Headers(response_headers);
         let status = original_response.status;
+		
+		if (disable_cache) {
+			new_response_headers.set('Cache-Control', 'no-store');
+		}
 
         new_response_headers.set('access-control-allow-origin', '*');
         new_response_headers.set('access-control-allow-credentials', true);
@@ -98,7 +105,7 @@ async function fetchAndApply(request) {
         } else {
             original_text = original_response_clone.body
         }
-
+		
         response = new Response(original_text, {
             status,
             headers: new_response_headers

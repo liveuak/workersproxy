@@ -90,6 +90,9 @@ const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 // 源站是否开启 HTTPS.
 const https = true
 
+// 是否允许浏览器缓存.
+const disable_cache = false
+
 // 文本替换.
 const replace_dict = {
     '$upstream': '$custom_domain',

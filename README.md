@@ -89,6 +89,9 @@ const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 // Whether to use HTTPS protocol for upstream address.
 const https = true
 
+// Whether to disable cache.
+const disable_cache = false
+
 // Replace texts.
 const replace_dict = {
     '$upstream': '$custom_domain',
