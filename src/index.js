@@ -87,7 +87,11 @@ async function fetchAndApply(request) {
         new_response_headers.delete('content-security-policy');
         new_response_headers.delete('content-security-policy-report-only');
         new_response_headers.delete('clear-site-data');
-
+		
+		if(new_response_headers.get("x-pjax-url")) {
+            new_response_headers.set("x-pjax-url", response_headers.get("x-pjax-url").replace("//" + upstream_domain, "//" + url_hostname));
+        }
+		
         const content_type = new_response_headers.get('content-type');
         if (content_type.includes('text/html') && content_type.includes('UTF-8')) {
             original_text = await replace_response_text(original_response_clone, upstream_domain, url_hostname);
