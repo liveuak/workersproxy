@@ -7,18 +7,23 @@
 
 Languages: [English](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README_zh.md).
 
-## 功能介绍
+## 介绍
 
-Workers-Proxy 是一个轻量级的 Javascript 应用程序. 它可以作为客户端从其他服务器请求资源.
+Workers-Proxy 是基于 [Cloudflare Workers](https://workers.cloudflare.com/) 的轻量级 Javascript [反向代理](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/).
 
-部署在 [Cloudflare Workers](https://www.cloudflare.com/products/cloudflare-workers/) 这个用于搭建无服务器应用程序的平台上,  用户可以无需购买服务器或配置 Web 服务器 (例如 Nginx 或 Apache) 而搭建反向代理.
+用户无需购买主机并配置 Web 服务器 (例如 Nginx 或 Apache) 即可在 Cloudflare 的全球网络上部署反向代理.
 
-此外, 关键性能, 例如延迟或可用性, 将会被优化, 因为无服务器应用将会被部署在 Cloudflare 的全球网络上. 该网络由 位于 90 个国家的 200 个城市中的数据中心组成.
+### 功能
 
-通过配置地区和 IP 过滤器, 你可以根据法律规定在部分国家和地区停用反向代理服务.  借助移动端跳转工具, 你可以根据用户的设备来分发不同的网站.
+* 搭建网站镜像
+* 通过 Cloudflare 的全球网络加速前端资源访问
+* 增加安全性, 隐藏网站的真实 IP 地址
+* 屏蔽特定地区或 IP 地址
+* 将移动设备用户转发到不同网站
 
 ## 示例
-[Reverse-Proxy Project](https://cdn.reverse-proxy.live) (该示例在部分地区不可用.)
+
+[Reverse-Proxy Project](https://cdn.reverse-proxy.live) (该示例在部分地区无法使用)
 
 ## 配置教程
 
@@ -61,9 +66,9 @@ wrangler publish
 
 2. 跳转到域名的控制面板, 选择 'Workers' 页面, 点击 'Add Route'.
 
-3. 在 `Route` `中输入 https://<domain-name>/*` 并且选择刚创建的 Worker.
+3. 在 `Route` `中输入 https://<自定义域名>/*` 并且选择刚创建的 Worker.
 
-4. 为自定义域名添加 CNAME DNS 记录. 在 DNS 页面中, 在 'Name' 区域输入自定义域名的子域名 (或者 @), 在 'Target' 区域输入 Worker 的**二级域名**, 将代理状态选择为 '代理'.
+4. 为自定义域名添加 CNAME DNS 记录. 在 DNS 页面中, 在 'Name' 区域输入自定义域名的子域名 (或者 @), 在 'Target' 区域输入 Worker 的**二级域名** (例如 test.workers.dev), 将代理状态选择为 '代理'.
 
 ### 自定义 index.js
 
@@ -72,39 +77,55 @@ wrangler publish
 为了自定义 Workers-Proxy 反向代理, 请根据需求编辑这些常量.
 
 ```
-// 代理网站.
+// 代理网站
 const upstream = 'www.google.com'
 
-// 代理网站的目录.
+// 代理网站的目录
 const upstream_path = '/'
 
-// 手机用户代理网站.
+// 手机用户代理网站
 const upstream_mobile = 'www.google.com'
 
-// 屏蔽国家和地区.
+// 屏蔽国家和地区
 const blocked_region = ['CN', 'KP', 'SY', 'PK', 'CU']
 
-// 屏蔽 IP 地址.
+// 屏蔽 IP 地址
 const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 
-// 源站是否开启 HTTPS.
+// 源站是否开启 HTTPS
 const https = true
 
-// 是否允许浏览器缓存.
+// 是否允许浏览器缓存
 const disable_cache = false
 
-// 文本替换.
+// 文本替换
 const replace_dict = {
     '$upstream': '$custom_domain',
     '//google.com': ''
 }
 ```
 
-### 配置示例
+### 配置模板
 
 * [Google](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google)
-* [Google Maps](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google-maps)
 * [Google Scholars](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google-scholar)
+* [Github](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/github)
 * [Wikipedia](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia)
-* [Chinese Wikipedia](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia-zh)
+* [Wikipedia (Chinese)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia-zh)
 * [The New York Times](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/nytimes)
+* [Pornhub](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/pornhub)
+
+### 部署多个域名
+
+如果被反代的网站使用其他域名的静态资源时, 可以部署多个 Workers-Proxy 并配置文本替换.
+
+1. www.google.com 使用位于 www.gstatic.com 的静态资源
+2. 部署 Workers-Proxy A, 用于代理 www.gstatic.com
+3. 部署 Workers-Proxy B, 用于代理 www.google.com
+4. 配置 Workers-Proxy B 的文本替换:
+```
+const replace_dict = {
+    '$upstream': '$custom_domain',
+    'www.gstatic.com': '<Workers-Proxy A 的域名>'
+}
+```

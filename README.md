@@ -8,15 +8,21 @@
 Languages: [English](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README_zh.md).
 
 ## Introduction
-Workers-Proxy is a lightweight Javascript application that retrieves resource as a client from other servers.
 
-Deploying on [Cloudflare Workers](https://www.cloudflare.com/products/cloudflare-workers/), which is an influential platform for building serverless applications, you could build customized reverse proxy without purchasing virtual machines and configuring web servers such as Nginx or Apache.
+Workers-Proxy is a lightweight Javascript [Reverse Proxy](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/) based on [Cloudflare Workers](https://workers.cloudflare.com/).
 
-Moreover, crucial performance such as latency and availability will be optimized, since your serverless application will be deployed on Cloudflare's global network of data centers across 200 cities in 90 countries.
+Users could deploy the reverse proxy on Cloudflare's global network without setting up virtual private servers and configuring Nginx or Apache.
 
-By configuring Geolocation and IP address filters, you could directly suspend your reverse proxy service in specific countries or regions based on their regulations. Taking advantage of the mobile redirector, you could distribute various webpages based on users' devices.
+### Features
+
+* Build mirror websites
+* Improve loading speed with Cloudflare's global network
+* Increase security (Hide IP addresses of websites)
+* Block specific areas or IP addresses
+* Redirect mobile users to different web pages
 
 ## Demo
+
 [Reverse-Proxy Project](https://cdn.reverse-proxy.live) (This demo may not be available in specific regions.)
 
 ## Getting Started
@@ -60,7 +66,7 @@ wrangler publish
 
 2. Navigate to the dashboard of your domain, select 'Workers' page, and click on 'Add Route'.
 
-3. Type `https://<domain-name>/*` in `Route` and select the Worker you created previously.
+3. Type `https://<domain_name>/*` in `Route` and select the Worker you created previously.
 
 4. Add a CNAME DNS record for your custom domain. Concretely, enter the subdomain (or '@' for root) in the 'Name' field, enter the **second level domain** of your workers in the 'Target' field, and set 'Proxy status' to 'Proxied'.
 
@@ -102,8 +108,24 @@ const replace_dict = {
 ### Example Configurations
 
 * [Google](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google)
-* [Google Maps](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google-maps)
 * [Google Scholars](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google-scholar)
+* [Github](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/github)
 * [Wikipedia](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia)
-* [Chinese Wikipedia](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia-zh)
+* [Wikipedia (Chinese)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia-zh)
 * [The New York Times](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/nytimes)
+* [Pornhub](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/pornhub)
+
+### Websites with Multiple Domains
+
+If the website uses another domain name to serve static resources, users could deploy multiple Workers-Proxy and configure text replacement.
+
+1. **www.google.com** serve static resources on **www.gstatic.com**
+2. Deploy **Workers-Proxy A** to proxy **www.gstatic.com**
+3. Deploy **Workers-Proxy B** to proxy **www.google.com**
+4. Configure text replacement for **Workers-Proxy B**:
+```
+const replace_dict = {
+    '$upstream': '$custom_domain',
+    'www.gstatic.com': '<Domain name of Workers-Proxy A>'
+}
+```
