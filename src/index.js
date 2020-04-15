@@ -100,7 +100,7 @@ async function fetchAndApply(request) {
         }
 		
         const content_type = new_response_headers.get('content-type');
-        if (content_type.includes('text/html') && content_type.includes('UTF-8')) {
+        if (content_type != null && content_type.includes('text/html') && content_type.includes('UTF-8')) {
             original_text = await replace_response_text(original_response_clone, upstream_domain, url_hostname);
         } else {
             original_text = original_response_clone.body
