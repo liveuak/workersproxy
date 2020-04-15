@@ -71,8 +71,8 @@ async function fetchAndApply(request) {
         let request_headers = request.headers;
         let new_request_headers = new Headers(request_headers);
 
-        new_request_headers.set('Host', url.hostname);
-        new_request_headers.set('Referer', url.hostname);
+        new_request_headers.set('Host', upstream_domain);
+        new_request_headers.set('Referer', url.protocol + '//' + url_hostname);
 
         let original_response = await fetch(url.href, {
             method: method,
@@ -87,7 +87,7 @@ async function fetchAndApply(request) {
 		
 		if (disable_cache) {
 			new_response_headers.set('Cache-Control', 'no-store');
-		}
+	    }
 
         new_response_headers.set('access-control-allow-origin', '*');
         new_response_headers.set('access-control-allow-credentials', true);
@@ -95,7 +95,7 @@ async function fetchAndApply(request) {
         new_response_headers.delete('content-security-policy-report-only');
         new_response_headers.delete('clear-site-data');
 		
-		if(new_response_headers.get("x-pjax-url")) {
+        if(new_response_headers.get("x-pjax-url")) {
             new_response_headers.set("x-pjax-url", response_headers.get("x-pjax-url").replace("//" + upstream_domain, "//" + url_hostname));
         }
 		
