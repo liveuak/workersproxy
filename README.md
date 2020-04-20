@@ -1,11 +1,11 @@
 
 # Workers-Proxy
 
-[![LICENSE](https://img.shields.io/github/license/Siujoeng-Lau/Workers-Proxy.svg?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/LICENSE)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Siujoeng-Lau/Workers-Proxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/issues)
-[![GitHub stars](https://img.shields.io/github/stars/Siujoeng-Lau/Workers-Proxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/stargazers)
+[![LICENSE](https://img.shields.io/github/license/Berkeley-Reject/Workers-Proxy.svg?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/LICENSE)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/stargazers)
 
-Languages: [English](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README_zh.md).
+Languages: [English](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README_zh.md).
 
 ## Introduction
 
@@ -24,6 +24,11 @@ Users could deploy the reverse proxy on Cloudflare's global network without sett
 ## Demo
 
 [Reverse-Proxy Project](https://cdn.reverse-proxy.live) (This demo may not be available in specific regions.)
+
+[UCLA](https://ucla.reverse-proxy.live)
+
+[Python Documentation](https://python.reverse-proxy.live)
+
 
 ## Getting Started
 
@@ -56,7 +61,7 @@ wrangler publish
 
 1. Navigate to [Cloudflare Workers](https://workers.cloudflare.com), register or sign in your Cloudflare account, and set custom subdomain for workers, and create a new Worker.
 
-2. Customize '[src/index.js](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/src/index.js)', paste the code into Cloudflare online editor to replace the default one.
+2. Customize '[src/index.js](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/src/index.js)', paste the code into Cloudflare online editor to replace the default one.
 
 3. Change name of your Worker, save and deploy it, and check whether its performance fulfills your demand.
 

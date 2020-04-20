@@ -1,11 +1,11 @@
 
 # Workers-Proxy
 
-[![LICENSE](https://img.shields.io/github/license/Siujoeng-Lau/Workers-Proxy.svg?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/LICENSE)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Siujoeng-Lau/Workers-Proxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/issues)
-[![GitHub stars](https://img.shields.io/github/stars/Siujoeng-Lau/Workers-Proxy?style=for-the-badge)](https://github.com/Siujoeng-Lau/Workers-Proxy/stargazers)
+[![LICENSE](https://img.shields.io/github/license/Berkeley-Reject/Workers-Proxy.svg?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/LICENSE)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/stargazers)
 
-Languages: [English](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/README_zh.md).
+文档语言: [English](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README_zh.md).
 
 ## 介绍
 
@@ -24,6 +24,10 @@ Workers-Proxy 是基于 [Cloudflare Workers](https://workers.cloudflare.com/) �
 ## 示例
 
 [Reverse-Proxy Project](https://cdn.reverse-proxy.live) (该示例在部分地区无法使用)
+
+[UCLA](https://ucla.reverse-proxy.live)
+
+[Python 文档](https://python.reverse-proxy.live)
 
 ## 配置教程
 
@@ -56,7 +60,7 @@ wrangler publish
 
 1. 转到 [Cloudflare Workers](https://workers.cloudflare.com), 注册或登录 Cloudflare 账号, 为 Workers 设置子域名, 创建新的 Worker.
 
-2. 自定义 '[src/index.js](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/src/index.js)', 将代码复制到在线编辑器中, 替换默认代码.
+2. 自定义 '[src/index.js](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/src/index.js)', 将代码复制到在线编辑器中, 替换默认代码.
 
 3. 更改 Worker 名称, 保存代码并部署, 测试反向代理是否符合需求.
 
