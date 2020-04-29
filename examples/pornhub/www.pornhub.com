@@ -23,6 +23,7 @@ const disable_cache = false
 const replace_dict = {
     '$upstream': '$custom_domain',
     '//ci.phncdn.com': '//ciphncdncom.pornproxy.workers.dev', // replace this with your other deployment.
+    'var scriptText': '', // Issue #30
     'trafficjunky.com': '',
     'trafficjunky.net': '',
     'contentabc.com': '',
