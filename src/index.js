@@ -17,7 +17,7 @@ const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 const https = true
 
 // Whether to disable cache.
-const disable_cache = true
+const disable_cache = false
 
 // Replace texts.
 const replace_dict = {
@@ -30,7 +30,6 @@ addEventListener('fetch', event => {
 })
 
 async function fetchAndApply(request) {
-
     const region = request.headers.get('cf-ipcountry').toUpperCase();
     const ip_address = request.headers.get('cf-connecting-ip');
     const user_agent = request.headers.get('user-agent');
@@ -79,6 +78,11 @@ async function fetchAndApply(request) {
             headers: new_request_headers
         })
 
+        connection_upgrade = new_request_headers.get("Upgrade");
+        if (connection_upgrade && connection_upgrade.toLowerCase() == "websocket") {
+            return original_response;
+        }
+
         let original_response_clone = original_response.clone();
         let original_text = null;
         let response_headers = original_response.headers;
@@ -95,7 +99,7 @@ async function fetchAndApply(request) {
         new_response_headers.delete('content-security-policy-report-only');
         new_response_headers.delete('clear-site-data');
 		
-        if(new_response_headers.get("x-pjax-url")) {
+		if (new_response_headers.get("x-pjax-url")) {
             new_response_headers.set("x-pjax-url", response_headers.get("x-pjax-url").replace("//" + upstream_domain, "//" + url_hostname));
         }
 		
