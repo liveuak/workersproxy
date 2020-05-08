@@ -1,3 +1,6 @@
+![](https://repository-images.githubusercontent.com/102965805/c78b5880-7f54-11ea-9e8c-5ec65c48633c)
+
+<p align="center">
 
 # Workers-Proxy
 
@@ -5,7 +8,11 @@
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/issues)
 [![GitHub stars](https://img.shields.io/github/stars/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/stargazers)
 
-文档语言: [English](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README_zh.md).
+[Issues](https://github.com/Berkeley-Reject/Workers-Proxy/issues) |
+[Pull requests](https://github.com/Berkeley-Reject/Workers-Proxy/pulls) |
+[贡献者](https://github.com/Berkeley-Reject/Workers-Proxy/graphs/contributors)
+
+</p>
 
 ## 介绍
 
@@ -23,9 +30,9 @@ Workers-Proxy 是基于 [Cloudflare Workers](https://workers.cloudflare.com/) �
 
 ## 示例
 
-[Reverse-Proxy Project](https://cdn.reverse-proxy.live) (该示例在部分地区无法使用)
+[GitHub](https://cdn.reverse-proxy.live) (该示例在部分地区无法使用)
 
-[UCLA](https://ucla.reverse-proxy.live)
+[University of California, Los Angeles (UCLA)](https://ucla.reverse-proxy.live)
 
 [Python 文档](https://python.reverse-proxy.live)
 
@@ -40,10 +47,10 @@ Workers-Proxy 是基于 [Cloudflare Workers](https://workers.cloudflare.com/) �
 2. 创建一个新的项目.
 
 ```
-wrangler generate my-workers-proxy https://github.com/Siujoeng-Lau/Workers-Proxy
+wrangler generate my-workers-proxy https://github.com/Berkeley-Reject/Workers-Proxy
 ```
 
-3. [配置](https://developers.cloudflare.com/workers/quickstart/#configure) 该项目的 `wrangler.toml` 文件来准备部署你的项目.
+3. [配置](https://developers.cloudflare.com/workers/quickstart/#configure)该项目的 `wrangler.toml` 文件来准备部署你的项目.
 
 ```
 wrangler config
@@ -70,7 +77,7 @@ wrangler publish
 
 2. 跳转到域名的控制面板, 选择 'Workers' 页面, 点击 'Add Route'.
 
-3. 在 `Route` `中输入 https://<自定义域名>/*` 并且选择刚创建的 Worker.
+3. 在 `Route` 中输入 `https://<自定义域名>/*` 并且选择刚创建的 Worker.
 
 4. 为自定义域名添加 CNAME DNS 记录. 在 DNS 页面中, 在 'Name' 区域输入自定义域名的子域名 (或者 @), 在 'Target' 区域输入 Worker 的**二级域名** (例如 test.workers.dev), 将代理状态选择为 '代理'.
 
@@ -111,13 +118,13 @@ const replace_dict = {
 
 ### 配置模板
 
-* [Google](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google)
-* [Google Scholars](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google-scholar)
-* [Github](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/github)
-* [Wikipedia](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia)
-* [Wikipedia (Chinese)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia-zh)
-* [The New York Times](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/nytimes)
-* [Pornhub](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/pornhub)
+* [Google](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/google)
+* [Google Scholars](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/google-scholar)
+* [GitHub](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/github)
+* [Wikipedia](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/wikipedia)
+* [Wikipedia (Chinese)](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/wikipedia-zh)
+* [The New York Times](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/nytimes)
+* [Pornhub](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/pornhub)
 
 ### 部署多个域名
 

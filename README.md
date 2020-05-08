@@ -1,3 +1,6 @@
+![](https://repository-images.githubusercontent.com/102965805/c78b5880-7f54-11ea-9e8c-5ec65c48633c)
+
+<p align="center">
 
 # Workers-Proxy
 
@@ -5,7 +8,11 @@
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/issues)
 [![GitHub stars](https://img.shields.io/github/stars/Berkeley-Reject/Workers-Proxy?style=for-the-badge)](https://github.com/Berkeley-Reject/Workers-Proxy/stargazers)
 
-Languages: [English](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README.md), [简体中文](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/README_zh.md).
+[Issues](https://github.com/Berkeley-Reject/Workers-Proxy/issues) |
+[Pull requests](https://github.com/Berkeley-Reject/Workers-Proxy/pulls) | 
+[Contributors](https://github.com/Berkeley-Reject/Workers-Proxy/graphs/contributors)
+
+</p>
 
 ## Introduction
 
@@ -23,9 +30,9 @@ Users could deploy the reverse proxy on Cloudflare's global network without sett
 
 ## Demo
 
-[Reverse-Proxy Project](https://cdn.reverse-proxy.live) (This demo may not be available in specific regions.)
+[GitHub](https://cdn.reverse-proxy.live) (This demo may not be available in specific regions.)
 
-[UCLA](https://ucla.reverse-proxy.live)
+[University of California, Los Angeles (UCLA)](https://ucla.reverse-proxy.live)
 
 [Python Documentation](https://python.reverse-proxy.live)
 
@@ -41,7 +48,7 @@ Users could deploy the reverse proxy on Cloudflare's global network without sett
 2. Generate a new project.
 
 ```
-wrangler generate my-workers-proxy https://github.com/Siujoeng-Lau/Workers-Proxy
+wrangler generate my-workers-proxy https://github.com/Berkeley-Reject/Workers-Proxy
 ```
 
 3. [Configure](https://developers.cloudflare.com/workers/quickstart/#configure) your project's `wrangler.toml` file to prepare your project for deployment.
@@ -112,13 +119,13 @@ const replace_dict = {
 
 ### Example Configurations
 
-* [Google](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google)
-* [Google Scholars](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/google-scholar)
-* [Github](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/github)
-* [Wikipedia](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia)
-* [Wikipedia (Chinese)](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/wikipedia-zh)
-* [The New York Times](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/nytimes)
-* [Pornhub](https://github.com/Siujoeng-Lau/Workers-Proxy/blob/master/examples/pornhub)
+* [Google](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/google)
+* [Google Scholars](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/google-scholar)
+* [Github](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/github)
+* [Wikipedia](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/wikipedia)
+* [Wikipedia (Chinese)](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/wikipedia-zh)
+* [The New York Times](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/nytimes)
+* [Pornhub](https://github.com/Berkeley-Reject/Workers-Proxy/blob/master/examples/pornhub)
 
 ### Websites with Multiple Domains
 
