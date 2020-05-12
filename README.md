@@ -43,7 +43,7 @@ Users could deploy the reverse proxy on Cloudflare's global network without sett
 
 #### Deploy with Wrangler
 
-1. [Installing Wrangler.](https://github.com/cloudflare/wrangler#installation)
+1. [Install Wrangler.](https://github.com/cloudflare/wrangler#installation)
 
 2. Generate a new project.
 
